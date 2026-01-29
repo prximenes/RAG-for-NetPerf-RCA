@@ -1,0 +1,9 @@
+{
+  "source": "local-pdf",
+  "title": "A Survey of Fault Management in Network Virtualization Environments: Challenges and Solutions",
+  "url": "https://www.semanticscholar.org/paper/043cda6931ec91a792b76d3eeea1832957e53251",
+  "category": "networking",
+  "target_system": "linux-generic",
+  "collected_at": "2025-11-27T17:50:40.865106+00:00",
+  "original_path": "/home/pedro/Documents/GPRT/llm-tune-RAG/new-dataset-for-rag/pdfs/doi-10.1109_TNSM.2019.2948420.pdf"
+}

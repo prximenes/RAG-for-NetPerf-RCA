@@ -1,0 +1,9 @@
+{
+  "source": "local-pdf",
+  "title": "A survey on accelerating technologies for fast network packet processing in Linux environments",
+  "url": "https://doi.org/10.1016/j.comcom.2022.10.003",
+  "category": "kvm",
+  "target_system": "linux-generic",
+  "collected_at": "2025-11-27T17:50:40.734812+00:00",
+  "original_path": "/home/pedro/Documents/GPRT/llm-tune-RAG/new-dataset-for-rag/pdfs/j.comcom.2022.10.003.pdf"
+}

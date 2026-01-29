@@ -1,0 +1,9 @@
+{
+  "source": "local-pdf",
+  "title": "Takeaways from an experimental evaluation of eXpress Data Path (XDP) and Data Plane Development Kit (DPDK) under a Cloud Computing environment",
+  "url": "https://doi.org/10.33448/rsd-v11i12.34200",
+  "category": "packet_acceleration",
+  "target_system": "linux-generic",
+  "collected_at": "2025-11-27T17:50:40.810497+00:00",
+  "original_path": "/home/pedro/Documents/GPRT/llm-tune-RAG/new-dataset-for-rag/pdfs/rsd-v11i12.34200.pdf"
+}

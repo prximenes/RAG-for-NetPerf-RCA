@@ -1,0 +1,9 @@
+{
+  "source": "local-pdf",
+  "title": "Measuring the impact of SR-IOV and virtualization on packet round-trip time",
+  "url": "https://doi.org/10.1016/j.comcom.2023.09.013",
+  "category": "kvm",
+  "target_system": "linux-generic",
+  "collected_at": "2025-11-27T17:50:40.795255+00:00",
+  "original_path": "/home/pedro/Documents/GPRT/llm-tune-RAG/new-dataset-for-rag/pdfs/j.comcom.2023.09.013.pdf"
+}

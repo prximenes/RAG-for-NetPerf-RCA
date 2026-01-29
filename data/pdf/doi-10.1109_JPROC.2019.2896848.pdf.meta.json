@@ -1,0 +1,9 @@
+{
+  "source": "local-pdf",
+  "title": "Survey of Performance Acceleration Techniques for Network Function Virtualization",
+  "url": "https://www.semanticscholar.org/paper/6928399e4658ec681c8ee3d33b30171c28e6ec9e",
+  "category": "networking",
+  "target_system": "linux-generic",
+  "collected_at": "2025-11-27T17:50:40.863848+00:00",
+  "original_path": "/home/pedro/Documents/GPRT/llm-tune-RAG/new-dataset-for-rag/pdfs/doi-10.1109_JPROC.2019.2896848.pdf"
+}

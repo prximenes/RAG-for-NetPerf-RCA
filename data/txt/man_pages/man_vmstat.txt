@@ -1,0 +1,143 @@
+VMSTAT(8)                                                                    System Manager's Manual                                                                    VMSTAT(8)
+
+NOME
+       vmstat - Relata estatísticas de memória virtual
+
+SINOPSE
+       vmstat [option ...] [delay [count]]
+
+DESCRIÇÃO
+       vmstat relata informações sobre processos, memória, paginação, E/S de bloco, traps, discos e atividade de cpu.
+
+       O  primeiro  relatório  produzido fornece as médias desde a última reinicialização. Relatórios adicionais fornecem informações sobre um período de amostragem de atraso de
+       comprimento. Os relatórios de processos e de memória são instantâneos em ambos os casos.
+
+OPÇÕES
+       atraso O atraso entre atualizações em segundos. Se nenhum atraso for especificado, apenas um relatório é impresso com os valores médios desde a inicialização.
+
+       contagem
+              Número de atualizações. Na ausência de contagem, quando atraso é definido, o padrão é infinito.
+
+       -a, --active
+              Exibe memória ativa e inativa, com um kernel 2.5.41 ou superior.
+
+       -f, --forks
+              A opção -f exibe o número de bifurcações (forks) desde a inicialização. Isso inclui as chamadas do sistema de fork, vfork e clone, e é equivalente ao número  total
+              de tarefas criadas. Cada processo é representado por uma ou mais tarefas, dependendo do uso do segmento. Esta exibição não se repete.
+
+       -m, --slabs
+              Exibe slabinfo.
+
+       -n, --one-header
+              Exibe o cabeçalho apenas uma vez em vez de periodicamente.
+
+       -s, --stats
+              Exibe uma tabela de vários contadores de eventos e estatísticas de memória. Esta exibição não se repete.
+
+       -d, --disk
+              Relata estatísticas de disco (requer 2.5.70 ou superior).
+
+       -D, --disk-sum
+              Relata algumas estatísticas de resumo sobre a atividade do disco.
+
+       -p, --partition dispositivo
+              Estatísticas detalhadas sobre partição (requer 2.5.70 ou superior).
+
+       -S, --unit caractere
+              Switches outputs between 1000 (k), 1024 (K), 1000000 (m), or 1048576 (M)  bytes.  Note this does not change the block (bi/bo) fields.
+
+       -t, --timestamp
+              Anexa o carimbo de tempo para cada linha.
+
+       -w, --wide
+              Modo  de  saída  ampla (útil para sistemas com maior quantidade de memória, onde o modo de saída padrão sofre de quebras de coluna indesejadas). A saída é maior do
+              que 80 caracteres por linha.
+
+       -y, --no-first
+              Omits first report with statistics since system boot.
+
+       -V, --version
+              Exibe informação da versão e sai.
+
+       -h, --help
+              Exibe a ajuda e sai.
+
+DESCRIÇÃO DE CAMPOS PARA MODO DE VM
+   Procs
+       r: O número de processos executáveis (executando ou aguardando o tempo de execução).
+       b: O número de processos bloqueados aguardando E/S para concluir.
+
+   Memória
+       Estes não são afetados pela opção --unit.
+       swpd: a quantidade de memória virtual usada.
+       livre: a quantidade de memória ociosa.
+       buff: a quantidade de memória usada como buffers.
+       cache: a quantidade de memória utilizada como cache.
+       inativ: a quantidade de memória inativa. (opção -a)
+       ativo: a quantidade de memória ativa. (opção -a)
+
+   Swap
+       Estes não são afetados pela opção --unit.
+       si: Quantidade de memória trocada do disco (/s).
+       so: Quantidade de memória trocada para o disco (/s).
+
+   E/S
+       bi: Kibibyte received from a block device (KiB/s).
+       bo: Kibibyte sent to a block device (KiB/s).
+
+   Sistema
+       in: O número de interrupções por segundo, incluindo o relógio.
+       cs: o número de trocas de contexto por segundo.
+
+   CPU
+       Esses são percentuais de tempo total de CPU.
+       us: Time spent running non-kernel code.  (user time, including nice time)
+       sy: Time spent running kernel code.  (system time)
+       id: Time spent idle.  Prior to Linux 2.5.41, this includes IO-wait time.
+       wa: Time spent waiting for IO.  Prior to Linux 2.5.41, included in idle.
+       st: Time stolen from a virtual machine.  Prior to Linux 2.6.11, unknown.
+       gu: Time spent running KVM guest code (guest time, including guest nice).
+
+DESCRIÇÃO DE CAMPOS PARA MODO DE DISCO
+   Leituras
+       total: Total de leituras concluídas com sucesso
+       mescl.: Leituras agrupadas (resultando em uma E/S)
+       setores: Setores lidos com sucesso
+       ms: Milissegundos gastos lendo
+
+   Escritas
+       total: Total de escritas concluídas com sucesso
+       mescl.: Escritas agrupadas (resultando em uma E/S)
+       setores: Setores escritos com sucesso
+       ms: Milissegundos gastos escrevendo
+
+   E/S
+       atu: E/S em progresso
+       s: segundos gastos para E/S
+
+DESCRIÇÃO DE CAMPOS PARA MODO DE PARTIÇÃO
+       leituras: Número total de leituras emitidas para esta partição
+       set. lidos: Total de setores lidos para a partição
+       escritas: Número total de escritas emitidas para esta partição
+       escrit. solic: Número total de solicitações de escrita feitas para partição
+
+DESCRIÇÃO DE CAMPOS PARA MODO DE SLAB
+       Slab mode shows statistics per slab, for more information about this information see slabinfo(5)
+
+       cache: Nome do cache
+       núm: Número de objetos atualmente ativos
+       total: Número total de objetos disponíveis
+       tam.: Tamanho de cada objeto
+       págs.: Número de páginas com pelo menos um objeto ativo
+
+NOTAS
+       vmstat requires read access to files under /proc. The -m requires read access to /proc/slabinfo which may not be available to standard users.   Mount  options  for  /proc
+       such as subset=pid may also impact what is visible.
+
+VEJA TAMBÉM
+       free(1), iostat(1), mpstat(1), ps(1), sar(1), top(1), slabinfo(5)
+
+RELATANDO ERROS
+       Please send bug reports to ⟨procps@freelists.org⟩.
+
+procps-ng                                                                           2024-07-19                                                                          VMSTAT(8)

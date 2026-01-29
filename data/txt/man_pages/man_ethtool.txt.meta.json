@@ -1,0 +1,9 @@
+{
+  "type": "man_page",
+  "command": "ethtool",
+  "section": "8",
+  "source": "system",
+  "category": "linux_networking",
+  "target_system": "linux-generic",
+  "collected_at": "2025-12-13T12:15:04-03:00"
+}

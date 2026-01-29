@@ -293,32 +293,48 @@ class DatasetBuilder:
                     )
                 self.processed_hashes[str(pdf_file)] = file_hash
 
-        # Textos/KB: por padrão, este artefato usa `./kb_sample/`
-        web_dir = self.dataset_dir / "kb_sample"
-        if web_dir.exists():
-            roots = [web_dir / d for d in self.web_include_dirs] if self.web_include_dirs else [web_dir]
+        # Textos/KB:
+        # - Preferencialmente: ./data/web e ./data/txt (KB completa)
+        # - Fallback: ./kb_sample (KB mínima)
+        data_web_dir = self.dataset_dir / "data" / "web"
+        data_txt_dir = self.dataset_dir / "data" / "txt"
+        kb_sample_dir = self.dataset_dir / "kb_sample"
+
+        kb_bases: List[Path] = []
+        if data_web_dir.exists():
+            kb_bases.append(data_web_dir)
+        if data_txt_dir.exists():
+            kb_bases.append(data_txt_dir)
+        if not kb_bases and kb_sample_dir.exists():
+            kb_bases.append(kb_sample_dir)
+
+        if kb_bases:
             ignore_dirs = {"__pycache__", ".git", ".svn", "_build", "build", "_static", "img", "images"}
             exts = {".md", ".markdown", ".txt", ".rst", ".ini", ".cfg", ".conf"}
 
-            files: List[Path] = []
-            for r in roots:
-                files.extend(self._iter_files(r, exts=exts, ignore_dirs=ignore_dirs, max_bytes=5_000_000))
+            for base in kb_bases:
+                roots = [base / d for d in self.web_include_dirs] if self.web_include_dirs else [base]
 
-            if self.web_exclude_dirs:
-                excluded = set(self.web_exclude_dirs)
+                files: List[Path] = []
+                for r in roots:
+                    files.extend(self._iter_files(r, exts=exts, ignore_dirs=ignore_dirs, max_bytes=5_000_000))
 
-                def keep(p: Path) -> bool:
-                    try:
-                        rel = p.relative_to(web_dir)
-                    except ValueError:
-                        return True
-                    return not rel.parts or rel.parts[0] not in excluded
+                # Exclusions são aplicadas apenas ao primeiro nível relativo do "base"
+                if self.web_exclude_dirs:
+                    excluded = set(self.web_exclude_dirs)
 
-                files = [p for p in files if keep(p)]
+                    def keep(p: Path) -> bool:
+                        try:
+                            rel = p.relative_to(base)
+                        except ValueError:
+                            return True
+                        return not rel.parts or rel.parts[0] not in excluded
 
-            for f in sorted(set(files)):
-                st = f.suffix.lower().lstrip(".") or "text"
-                all_points.extend(self._process_text_file(f, source_type=st, incremental=incremental))
+                    files = [p for p in files if keep(p)]
+
+                for f in sorted(set(files)):
+                    st = f.suffix.lower().lstrip(".") or "text"
+                    all_points.extend(self._process_text_file(f, source_type=st, incremental=incremental))
 
         if all_points:
             logger.info("Inserindo %s chunks...", len(all_points))

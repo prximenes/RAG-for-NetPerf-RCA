@@ -119,11 +119,11 @@ Após o build, garanta que `llama-server` está no seu `PATH` (ou ajuste o scrip
 
 O teste mínimo executa:
 
-1. build do índice vetorial (Qdrant embedded) a partir da KB de exemplo
+1. build do índice vetorial (Qdrant embedded) a partir da KB do artefato
 2. start do `llama-server`
 3. execução de uma avaliação curta (2 cenários) com RAG
 
-## 1) Build do Qdrant (KB pequena)
+## 1) Build do Qdrant (KB completa)
 
 ```bash
 uv run python rag/build_dataset.py --dataset-dir . --clear
@@ -159,7 +159,7 @@ Ao final, você deve ver arquivos JSON em `results/minimal_test/`.
 uv run python rag/build_dataset.py --dataset-dir . --clear
 ```
 
-> Para usar uma KB maior, substitua `kb_sample` por um diretório com seus dados (ex.: `data/web/...`) e ajuste `--web-include-dirs`/`--web-exclude-dirs`.
+> Nesta branch (`full-kb`), a KB completa está em `./data/` (ex.: `./data/web`, `./data/txt`, `./data/pdf`). Use `--web-include-dirs`/`--web-exclude-dirs` para controlar subpastas (ex.: excluir `community`).
 
 ### 2) Iniciar o `llama-server`
 

@@ -1,0 +1,44 @@
+---
+                    {
+  "source": "docsrepo",
+  "label": "docker-docs",
+  "repo_url": "https://github.com/docker/docs.git",
+  "ref": "main",
+  "commit": "202475fe91af5b37340ed5bfe7f4c35bcce85e2c",
+  "path_in_repo": "content/manuals/extensions/extensions-sdk/guides/use-docker-socket-from-backend.md",
+  "description": "Docker documentation website content (docker/docs repo).",
+  "license": "Docker documentation (see docker/docs repository for license)",
+  "collected_at": "2025-12-15T17:38:12.910941+00:00"
+}
+                    ---
+                    # content/manuals/extensions/extensions-sdk/guides/use-docker-socket-from-backend.md
+
+                    ---
+title: Use the Docker socket from the extension backend
+linkTitle: Use the Docker socket
+description: Docker extension metadata
+keywords: Docker, extensions, sdk, metadata
+aliases: 
+ - /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
+---
+
+Extensions can invoke Docker commands directly from the frontend with the SDK. 
+
+In some cases, it is useful to also interact with Docker Engine from the backend. 
+
+Extension backend containers can mount the Docker socket and use it to
+interact with Docker Engine from the extension backend logic. Learn more about the [Docker Engine socket](/reference/cli/dockerd/#examples)
+
+However, when mounting the Docker socket from an extension container that lives in the Desktop virtual machine, you want
+to mount the Docker socket from inside the VM, and not mount `/var/run/docker.sock` from the host filesystem (using
+the Docker socket from the host can lead to permission issues in containers).
+
+In order to do so, you can use `/var/run/docker.sock.raw`. Docker Desktop mounts the socket that lives in the Desktop VM, and not from the host.
+
+```yaml
+services:
+  myExtension:
+    image: ${DESKTOP_PLUGIN_IMAGE}
+    volumes:
+      - /var/run/docker.sock.raw:/var/run/docker.sock
+```
