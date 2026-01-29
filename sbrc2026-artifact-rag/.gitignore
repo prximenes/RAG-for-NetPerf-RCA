@@ -1,0 +1,21 @@
+# Secrets / local keys
+.openrouter_key
+.judge_key
+
+# Qdrant embedded storage + builder cache
+qdrant_storage/
+.processed_hashes.json
+
+# Results / artifacts
+results/
+
+# Local models folder (optional)
+models/
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
