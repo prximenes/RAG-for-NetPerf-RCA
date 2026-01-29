@@ -1,4 +1,4 @@
-# Título do Projeto
+# RAG FOR NETPERF-RCA
 
 **Artefato SBRC 2026 — RAG para Diagnóstico de Cenários de Rede (RCA)**
 
